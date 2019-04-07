@@ -1,0 +1,19 @@
+{
+  "name": "mongo",
+  "version": "1.0.0",
+  "description": "mongoose, MongoClient",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "wwdaonngg",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.4.22",
+    "mongodb": "^3.2.3"
+  }
+}
