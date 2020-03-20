@@ -6,19 +6,19 @@ const assert = require('assert');
 
 (async function() {
     // Connection URL
-    const url = 'mongodb://test:123456@localhost:27017/todo';
+    const url = 'mongodb://127.0.0.1:27017/test';
     // Database Name
-    const dbName = 'todo';
-    const client = new MongoClient(url,{useNewUrlParser:true});
+    const dbName = 'test';
+    const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology: true});
 
     try {
 	//Use connect method to connect to the Server
 	await client.connect();
 
 	const db = client.db(dbName);
-	//console.log(db);
+        console.log(db);
     } catch (err) {
-	console.log(err.stack);
+	    console.log(err.stack);
     }
 
     client.close();

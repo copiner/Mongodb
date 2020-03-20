@@ -4,11 +4,11 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://test:123456@localhost:27017/todo';
-const dbName = 'todo';
+const url = 'mongodb://localhost:27017/test';
+const dbName = 'test';
 
 (async function() {
-    const client = new MongoClient(url,{useNewUrlParser:true});
+    const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology: true});
 
   try {
     await client.connect();

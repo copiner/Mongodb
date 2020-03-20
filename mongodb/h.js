@@ -5,11 +5,11 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://test:123456@localhost:27017/todo';
-const dbName = 'todo';
+const url = 'mongodb://localhost:27017/test';
+const dbName = 'test';
 
 (async function() {
-    const client = new MongoClient(url,{useNewUrlParser:true);
+  const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology:true});
 
   try {
     await client.connect();
@@ -18,9 +18,9 @@ const dbName = 'todo';
     const db = client.db(dbName);
 
     // Get the collection
-    const col = db.collection('bulk_write');
+    const bws = db.collection('bulkWrites');
 
-    const r = await col.bulkWrite([
+    const r = await bws.bulkWrite([
         { insertOne: { document: { a: 1 } } },
         { updateOne: { filter: {a:2}, update: {$set: {a:2}}, upsert:true } },
         { updateMany: { filter: {a:2}, update: {$set: {a:2}}, upsert:true } },

@@ -5,11 +5,11 @@ Read Methods
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://test:123456@localhost:27017/todo';
-const dbName = 'todo';
+const url = 'mongodb://localhost:27017/test';
+const dbName = 'test';
 
 (async function() {
-    const client = new MongoClient(url,{useNewUrlParser:true});
+  const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology:true});
   try {
     await client.connect();
     console.log("Connected correctly to server");
@@ -20,7 +20,8 @@ const dbName = 'todo';
     const adminDb = db.admin();
 
     // Retrive the build information using the admin command
-    await adminDb.command({buildInfo:1})
+    let result = await adminDb.command({buildInfo:1});
+    console.log(result);
   } catch (err) {
     console.log(err.stack);
   }

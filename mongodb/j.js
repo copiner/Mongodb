@@ -5,11 +5,11 @@ Read Methods
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://test:123456@localhost:27017/todo';
-const dbName = 'todo';
+const url = 'mongodb://localhost:27017/test';
+const dbName = 'test';
 
 (async function() {
-    const client = new MongoClient(url,{useNewUrlParser:true});
+    const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology:true});
 
   try {
     await client.connect();
@@ -18,7 +18,7 @@ const dbName = 'todo';
     const db = client.db(dbName);
 
     // Get the collection
-    const col = db.collection('find');
+    const col = db.collection('findread');
 
     // Insert multiple documents
     const r = await col.insertMany([{a:1}, {a:1}, {a:1}]);

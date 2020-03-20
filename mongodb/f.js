@@ -5,11 +5,11 @@ findOneAndUpdate
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://test:123456@localhost:27017/todo';
-const dbName = 'todo';
+const url = 'mongodb://localhost:27017/test';
+const dbName = 'test';
 
 (async function() {
-    const client = new MongoClient(url,{useNewUrlParser:true});
+ const client = new MongoClient(url,{useNewUrlParser:true,useUnifiedTopology:true});
 
   try {
     await client.connect();
@@ -18,15 +18,15 @@ const dbName = 'todo';
     const db = client.db(dbName);
 
     // Get the findAndModify collection
-    const col = db.collection('findAndModify');
+    const fam = db.collection('findAndModify');
     let r;
 
     // Insert multiple documents
-    r = await col.insert([{a:1}, {a:2}, {a:2}]);
+    r = await fam.insertMany([{a:1}, {a:2}, {a:2}]);
     assert.equal(3, r.result.n);
 
     // Modify and return the modified document
-    r = await col.findOneAndUpdate({a:1}, {$set: {b: 1}}, {
+    r = await fam.findOneAndUpdate({a:1}, {$set: {b: 1}}, {
       returnOriginal: false,
       sort: [['a',1]],
       upsert: true
